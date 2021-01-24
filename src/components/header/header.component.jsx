@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+// Connect is a higher order component
 
 import { auth } from "../../firebase/firebase.util";
 
@@ -32,4 +34,11 @@ const Header = ({ currentUser }) => (
   </div>
 );
 
-export default Header;
+// mapStateToProps is used for selecting the part
+// of the data from the store that the connected component needs
+const mapStateToProps = (state) => ({
+  // Returns a plain object containing the required data
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(Header);
