@@ -1,3 +1,4 @@
+// Function to make sure duplicates just change the count of the item
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToAdd.id
