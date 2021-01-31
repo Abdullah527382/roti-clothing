@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 // Connect is a higher order component
+import { createStructuredSelector } from "reselect";
 
 import { auth } from "../../firebase/firebase.util";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
@@ -40,10 +43,10 @@ const Header = ({ currentUser, hidden }) => (
 
 // mapStateToProps is used for selecting the part
 // of the data from the store that the connected component needs
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+const mapStateToProps = createStructuredSelector({
   // Returns a plain object containing the required data
-  currentUser,
-  hidden,
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 export default connect(mapStateToProps)(Header);
