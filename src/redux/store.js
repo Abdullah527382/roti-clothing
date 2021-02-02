@@ -8,7 +8,14 @@ import logger from "redux-logger";
 
 import rootReducer from "./root-reducer";
 
-const middlewares = [logger];
+// middlewares are functions we write that catch actions and do something before the reducer
+// An example of this is the logger
+const middlewares = [];
+
+// We want to check logger when env variable in node is set to development
+if (process.env.NODE_ENV === "development") {
+  middlewares.push(logger);
+}
 
 // Create our store with the imports
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
