@@ -51,6 +51,50 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+// Send shop data to firebase
+export const addCollectionsAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  // Call the function for each element
+  objectsToAdd.forEach((obj) => {
+    // Get the document at an empty string
+    // Gives a unique string
+    const newDocRef = collectionRef.doc();
+    // Batch the calls together:
+    batch.set(newDocRef, obj);
+  });
+  // Returns a promise, if commit succeeds it will resolve a void/null value
+  // Allowing us to chain this function with a '.then' if it succeeds
+  return await batch.commit();
+};
+
+// This function will get the whole snapshot
+// We will convert to an object rather than an array
+export const convertCollectionSnapshotToMap = (collections) => {
+  // Make sure we obtain the correct properties including the routing one
+  const transformedCollection = collections.docs.map((doc) => {
+    // Pull off the title and items properties
+    const { title, items } = doc.data();
+
+    return {
+      // Converts to URL readible string, as per routing imporrtance
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+  // Hats = hats collection .. Jackets = jackets collection
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  });
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();

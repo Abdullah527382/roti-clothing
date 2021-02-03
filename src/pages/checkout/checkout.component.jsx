@@ -9,9 +9,19 @@ import {
 
 import "./checkout.styles.scss";
 import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
+import { motion } from "framer-motion";
+import { pageTransition, pageVariants, pageStyle } from "../../pageTransitions";
 
 const CheckoutPage = ({ cartItems, total }) => (
-  <div className="checkout-page">
+  <motion.div
+    className="checkout-page"
+    style={pageStyle}
+    initial="initial"
+    animate="in"
+    exit="out"
+    variants={pageVariants}
+    transition={pageTransition}
+  >
     <div className="checkout-header">
       <div className="header-block">
         <span>Product</span>
@@ -41,7 +51,7 @@ const CheckoutPage = ({ cartItems, total }) => (
       4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
     </div>
     <StripeCheckoutButton price={total} />
-  </div>
+  </motion.div>
 );
 
 const mapStateToProps = createStructuredSelector({
