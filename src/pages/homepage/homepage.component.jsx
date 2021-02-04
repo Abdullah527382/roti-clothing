@@ -5,7 +5,7 @@ import Directory from "../../components/directory/directory.component";
 import "./homepage.styles.scss";
 
 import { HomePageContainer } from "./homepage.styles";
-import { pageTransition, pageVariants, pageStyle } from "../../pageTransitions";
+import { pageTransition, pageVariants } from "../../pageTransitions";
 import { motion } from "framer-motion";
 
 const HomePage = () => (

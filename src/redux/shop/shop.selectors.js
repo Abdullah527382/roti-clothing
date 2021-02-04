@@ -10,7 +10,8 @@ export const selectCollections = createSelector(
 // Create a new selector which converts an object to an array
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  (collections) => Object.keys(collections).map((key) => collections[key])
+  (collections) =>
+    collections ? Object.keys(collections).map((key) => collections[key]) : []
 );
 
 // We use the collection URL parameter to get the ID (mapped)

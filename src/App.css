@@ -1,6 +1,10 @@
 body {
   font-family: "Open Sans Condensed";
   padding: 20px 60px;
+  background-image: linear-gradient(#ffefba, #ffffff);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
 }
 
 a {
@@ -10,4 +14,8 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  height: 100%;
 }
